@@ -115,19 +115,6 @@ registerForm.onsubmit = function (event) {
     var username = registerFormUsernameInput.value
     var password = registerFormPasswordInput.value
 
-    var found = users.some(function (user) {
-        if (user.email === email || user.username === username)
-            return true
-
-        return false
-    })
-
-    if (found) {
-        alert('user already exists')
-
-        return
-    }
-
     var user = {}
     user.name = name
     user.email = email
@@ -194,27 +181,6 @@ loginForm.onsubmit = function (event) {
     event.preventDefault()
 
     // TODO validate credentials against users db (HINT find). if credentials ok, then go to home. otherwise show alert with "wrong credentials"
-
-    var username = loginFormUsernameInput.value
-    var password = loginFormPasswordInput.value
-
-    var user = users.find(function (user) {
-        if (user.username === username && user.password === password)
-            return true
-
-        return false
-    })
-
-    if (user === undefined) {
-        alert('wrong credentials')
-
-        return
-    }
-
-    homeUser.innerText = 'Hello, ' + user.name + '!'
-
-    body.removeChild(loginView)
-    body.appendChild(homeView)
 }
 
 var loginRegisterLink = document.createElement('a')
@@ -228,24 +194,3 @@ loginRegisterLink.onclick = function (event) {
     body.appendChild(registerView)
 }
 loginView.appendChild(loginRegisterLink)
-
-// home
-
-var homeView = document.createElement('main')
-
-var homeTitle = document.createElement('h2')
-homeTitle.innerText = 'Home'
-homeView.appendChild(homeTitle)
-
-var homeUser = document.createElement('h3')
-homeUser.innerText = 'Hello, User!'
-homeView.appendChild(homeUser)
-
-var homeLogoutButton = document.createElement('button')
-homeLogoutButton.innerText = 'Logout'
-homeView.appendChild(homeLogoutButton)
-
-homeLogoutButton.onclick = function () {
-    body.removeChild(homeView)
-    body.appendChild(loginView)
-}
