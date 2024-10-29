@@ -1,3 +1,7 @@
+// data
+
+var users = []
+
 // presentation & business (logic)
 
 var body = document.body
@@ -109,18 +113,31 @@ registerForm.onsubmit = function (event) {
     var username = registerFormUsernameInput.value
     var password = registerFormPasswordInput.value
 
-    try {
-        registerUser(name, email, username, password)
+    var found = users.some(function (user) {
+        if (user.email === email || user.username === username)
+            return true
 
-        registerForm.reset()
+        return false
+    })
 
-        body.removeChild(registerView)
-        body.appendChild(loginView)
-    } catch (error) {
-        alert(error.message)
+    if (found) {
+        alert('user already exists')
 
-        console.error(error)
+        return
     }
+
+    var user = {}
+    user.name = name
+    user.email = email
+    user.username = username
+    user.password = password
+
+    users.push(user)
+
+    registerForm.reset()
+
+    body.removeChild(registerView)
+    body.appendChild(loginView)
 }
 
 var registerLoginLink = document.createElement('a')
@@ -174,23 +191,28 @@ loginForm.appendChild(loginFormSubmitButton)
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
+    // TODO validate credentials against users db (HINT find). if credentials ok, then go to home. otherwise show alert with "wrong credentials"
+
     var username = loginFormUsernameInput.value
     var password = loginFormPasswordInput.value
 
-    try {
-        var user = loginUser(username, password)
+    var user = users.find(function (user) {
+        if (user.username === username && user.password === password)
+            return true
 
-        loginForm.reset()
+        return false
+    })
 
-        homeUser.innerText = 'Hello, ' + user.name + '!'
+    if (user === undefined) {
+        alert('wrong credentials')
 
-        body.removeChild(loginView)
-        body.appendChild(homeView)
-    } catch (error) {
-        alert(error.message)
-
-        console.error(error)
+        return
     }
+
+    homeUser.innerText = 'Hello, ' + user.name + '!'
+
+    body.removeChild(loginView)
+    body.appendChild(homeView)
 }
 
 var loginRegisterLink = document.createElement('a')
