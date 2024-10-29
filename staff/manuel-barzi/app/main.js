@@ -1,5 +1,3 @@
-// presentation & business (logic)
-
 var body = document.body
 
 var title = document.createElement('h1')
