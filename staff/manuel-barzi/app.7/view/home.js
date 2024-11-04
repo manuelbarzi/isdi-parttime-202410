@@ -1,6 +1,6 @@
 var homeView = document.createElement('main')
 
-if (logic.isUserLoggedIn())
+if (isUserLoggedIn())
     body.appendChild(homeView)
 
 var homeTitle = document.createElement('h2')
@@ -11,8 +11,8 @@ var homeUser = document.createElement('h3')
 homeUser.innerText = 'Hello, User!'
 homeView.appendChild(homeUser)
 
-if (logic.isUserLoggedIn()) {
-    var name = logic.getUserName()
+if (isUserLoggedIn()) {
+    var name = getUserName()
 
     homeUser.innerText = 'Hello, ' + name + '!'
 }
@@ -22,7 +22,7 @@ homeLogoutButton.innerText = 'Logout'
 homeView.appendChild(homeLogoutButton)
 
 homeLogoutButton.onclick = function () {
-    logic.logoutUser()
+    logoutUser()
 
     body.removeChild(homeView)
     body.appendChild(loginView)
@@ -40,8 +40,8 @@ homeAddPostButton.onclick = function () {
 var homePosts = document.createElement('section')
 homeView.appendChild(homePosts)
 
-if (logic.isUserLoggedIn()) {
-    var posts = logic.getPosts()
+if (isUserLoggedIn()) {
+    var posts = getPosts()
 
     homePosts.innerHTML = ''
 
@@ -50,7 +50,7 @@ if (logic.isUserLoggedIn()) {
         homePosts.appendChild(homePost)
 
         var postAuthor = document.createElement('h3')
-        postAuthor.innerText = post.author.username
+        postAuthor.innerText = post.author
         homePost.appendChild(postAuthor)
 
         var postImage = document.createElement('img')
@@ -108,14 +108,14 @@ homeCreatePostForm.onsubmit = function (event) {
     var text = homeCreatePostTextInput.value
 
     try {
-        logic.createPost(image, text)
+        createPost(image, text)
 
         homeCreatePostForm.reset()
 
         homeView.removeChild(homeCreatePost)
         homeView.appendChild(homePosts)
 
-        var posts = logic.getPosts()
+        var posts = getPosts()
 
         homePosts.innerHTML = ''
 
@@ -124,7 +124,7 @@ homeCreatePostForm.onsubmit = function (event) {
             homePosts.appendChild(homePost)
 
             var postAuthor = document.createElement('h3')
-            postAuthor.innerText = post.author.username
+            postAuthor.innerText = post.author
             homePost.appendChild(postAuthor)
 
             var postImage = document.createElement('img')
