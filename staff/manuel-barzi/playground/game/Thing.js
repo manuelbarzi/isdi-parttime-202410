@@ -28,18 +28,6 @@ class Thing {
         this.setXY(this.x, y)
     }
 
-    move(dx, dy) {
-        this.setXY(this.x + dx, this.y + dy)
-    }
-
-    moveX(dx) {
-        this.move(dx, 0)
-    }
-
-    moveY(dy) {
-        this.move(0, dy)
-    }
-
     add(thing) {
         this.container.appendChild(thing.container)
     }

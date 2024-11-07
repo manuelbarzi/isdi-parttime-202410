@@ -23,9 +23,21 @@ function MovableThing(container) {
 MovableThing.prototype = Object.create(Thing.prototype)
 MovableThing.prototype.constructor = MovableThing
 
-MovableThing.prototype.setKeys = function (upKey, downKey, leftKey, rightKey) {
+MovableThing.prototype.setMovingKeys = function (upKey, downKey, leftKey, rightKey) {
     this.upKey = upKey
     this.downKey = downKey
     this.leftKey = leftKey
     this.rightKey = rightKey
+}
+
+MovableThing.prototype.move = function (dx, dy) {
+    this.setXY(this.x + dx, this.y + dy)
+}
+
+MovableThing.prototype.moveX = function (dx) {
+    this.move(dx, 0)
+}
+
+MovableThing.prototype.moveY = function (dy) {
+    this.move(0, dy)
 }

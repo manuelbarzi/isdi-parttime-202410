@@ -21,10 +21,22 @@ class MovableThing extends Thing {
         })
     }
 
-    setKeys(upKey, downKey, leftKey, rightKey) {
+    setMovingKeys(upKey, downKey, leftKey, rightKey) {
         this.upKey = upKey
         this.downKey = downKey
         this.leftKey = leftKey
         this.rightKey = rightKey
+    }
+
+    move(dx, dy) {
+        this.setXY(this.x + dx, this.y + dy)
+    }
+
+    moveX(dx) {
+        this.move(dx, 0)
+    }
+
+    moveY(dy) {
+        this.move(0, dy)
     }
 }
