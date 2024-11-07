@@ -15,12 +15,19 @@ landingRegisterLink.href = ''
 landingRegisterLink.innerText = 'Register'
 landingIntro.appendChild(landingRegisterLink)
 
-landingRegisterLink.onclick = function (event) {
+// landingRegisterLink.onclick = function (event) {
+//     event.preventDefault()
+
+//     body.removeChild(landingView)
+//     body.appendChild(registerView)
+// }
+
+landingRegisterLink.addEventListener('click', function (event) {
     event.preventDefault()
 
     body.removeChild(landingView)
     body.appendChild(registerView)
-}
+})
 
 var landingIntroOrText = new Text(' or ')
 landingIntro.appendChild(landingIntroOrText)

@@ -21,4 +21,8 @@ class Component {
 
         this.container.removeChild(component.container)
     }
+
+    addBehavior(type, callback) {
+        this.container.addEventListener(type, callback)
+    }
 }

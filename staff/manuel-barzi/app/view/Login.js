@@ -1,27 +1,13 @@
-class Register extends Component {
+class Login extends Component {
     constructor() {
         super(document.createElement('main'))
 
         const title = new Heading(2)
-        title.setText('Register')
+        title.setText('Login')
         this.add(title)
 
         const form = new Form
         this.add(form)
-
-        const nameLabel = new Label('name')
-        nameLabel.setText('Name')
-        form.add(nameLabel)
-
-        const nameInput = new Input('text')
-        form.add(nameInput)
-
-        const emailLabel = new Label('email')
-        emailLabel.setText('E-mail')
-        form.add(emailLabel)
-
-        const emailInput = new Input('email')
-        form.add(emailInput)
 
         const usernameLabel = new Label('username')
         usernameLabel.setText('Username')
@@ -38,11 +24,25 @@ class Register extends Component {
         form.add(passwordInput)
 
         const submitButton = new Button('submit')
-        submitButton.setText('Register')
+        submitButton.setText('Login')
         form.add(submitButton)
 
         const registerLink = new Link
-        registerLink.setText('Login')
+        registerLink.setText('Register')
         this.add(registerLink)
+    }
+
+    onRegisterClick(callback) {
+        const registerLink = this.children[2]
+
+        registerLink.addBehavior('click', event => {
+            event.preventDefault()
+
+            callback()
+        })
+    }
+
+    onLoginSubmit(callback) {
+        // ?
     }
 }
