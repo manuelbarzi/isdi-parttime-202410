@@ -1,4 +1,4 @@
-var posts = []
+const posts = []
 
 posts.push({
     id: 'm2w92r8h13',

@@ -1,4 +1,4 @@
-var users = []
+const users = []
 
 users.push({
     id: 'm2w92r8h09',
