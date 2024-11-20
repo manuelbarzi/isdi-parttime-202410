@@ -5,6 +5,23 @@ class Home extends Component {
         console.log('Home -> constructor')
 
         super(props)
+
+        this.state = { name: null, posts: [] }
+    }
+
+    componentDidMount() {
+        console.log('Home -> componentDidMount')
+
+        try {
+            const name = logic.getUserName()
+            const posts = logic.getPosts()
+
+            this.setState({ name, posts })
+        } catch (error) {
+            alert(error.message)
+
+            console.error(error)
+        }
     }
 
     render() {
@@ -13,7 +30,7 @@ class Home extends Component {
         return <main>
             <h2>Home</h2>
 
-            <h3>Hello, Peter Pan!</h3>
+            <h3>Hello, {this.state.name}!</h3>
 
             <button type="button" onClick={() => {
                 try {
@@ -30,39 +47,32 @@ class Home extends Component {
             <button type="button">+</button>
 
             <section>
-                <article>
-                    <h3>jameshook</h3>
+                {this.state.posts.map(post =>
+                    <article>
+                        <h3>{post.author.username}</h3>
 
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUta_DEV6cHrXNEgAniEM6VKbFy4VTOTOjWY-qz3_IlyOUsAlh7ERThAbmM_tRLGeLow&amp;usqp=CAU" />
+                        <img src={post.image} />
 
-                    <p>here me</p>
+                        <p>{post.text}</p>
 
-                    <time>2024-11-13T20:28:20.453Z</time>
-                </article>
+                        <time>{post.date}</time>
 
-                <article>
-                    <h3>peterpan</h3>
+                        {post.own && <button type="button" onClick={() => {
+                            if (confirm('Delete post?'))
+                                try {
+                                    logic.deletePost(post.id)
 
-                    <img src="https://live.staticflickr.com/3064/2785899878_c3e48732e5_z.jpg" />
+                                    const posts = logic.getPosts()
 
-                    <p>in love &lt;3</p>
+                                    this.setState({ posts })
+                                } catch (error) {
+                                    alert(error.message)
 
-                    <time>2024-11-13T20:26:16.566Z</time>
-
-                    <button type="button">🗑️</button>
-                </article>
-
-                <article>
-                    <h3>peterpan</h3>
-
-                    <img src="https://jennycookies.com/wp-content/uploads/2012/09/KELLER-1007-800x534.jpg" />
-
-                    <p>when i was a kid</p>
-
-                    <time>2024-11-12T20:06:19.931Z</time>
-
-                    <button type="button">🗑️</button>
-                </article>
+                                    console.error(error)
+                                }
+                        }}>🗑️</button>}
+                    </article>
+                )}
             </section>
         </main>
     }
