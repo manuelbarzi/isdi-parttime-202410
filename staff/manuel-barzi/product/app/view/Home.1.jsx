@@ -6,7 +6,7 @@ class Home extends Component {
 
         super(props)
 
-        this.state = { name: null, view: 'posts' }
+        this.state = { name: null, posts: [] }
     }
 
     componentDidMount() {
@@ -14,8 +14,9 @@ class Home extends Component {
 
         try {
             const name = logic.getUserName()
+            const posts = logic.getPosts()
 
-            this.setState({ name })
+            this.setState({ name, posts })
         } catch (error) {
             alert(error.message)
 
@@ -43,10 +44,23 @@ class Home extends Component {
                 }
             }}>Logout</button>
 
-            <button type="button" onClick={() => this.setState({ view: 'create-post' })}>+</button>
+            <button type="button">+</button>
 
-            {this.state.view === 'posts' && <Posts />}
-            {this.state.view === 'create-post' && <CreatePost onPostCreated={() => this.setState({ view: 'posts' })} />}
+            <section>
+                {this.state.posts.map(post =>
+                    <Post post={post} onPostDeleted={() => {
+                        try {
+                            const posts = logic.getPosts()
+
+                            this.setState({ posts })
+                        } catch (error) {
+                            alert(error.message)
+
+                            console.error(error)
+                        }
+                    }} />
+                )}
+            </section>
         </main>
     }
 }
