@@ -1,6 +1,6 @@
 const validate = require('./helpers/validate')
 
-const localStorage = require('../data/localStorage')
+const localStorage = require('../data/locaStorage')
 const sessionStorage = require('../data/sessionStorage')
 
 const loginUser = (username, password) => {

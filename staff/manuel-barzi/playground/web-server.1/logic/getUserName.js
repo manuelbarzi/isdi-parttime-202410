@@ -1,4 +1,4 @@
-const localStorage = require('../data/localStorage')
+const localStorage = require('../data/locaStorage')
 const sessionStorage = require('../data/sessionStorage')
 
 const getUserName = () => {
