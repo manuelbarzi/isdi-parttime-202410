@@ -1,1 +1,1 @@
-# TODO implement me
+curl -X GET http://localhost:8080/users/m48wvu1xioo -v

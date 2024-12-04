@@ -36,4 +36,16 @@ api.post('/users/auth', jsonBodyParser, (req, res) => {
 
 // TODO implement route and middleware for get user name
 
+api.get('/users/:userId', (req, res) => {
+    try {
+        const { userId } = req.params
+
+        const name = logic.getUserName(userId)
+
+        res.json(name)
+    } catch (error) {
+        res.status(400).json({ error: error.constructor.name, message: error.message })
+    }
+})
+
 api.listen(PORT, () => console.log(`API running on port ${PORT}`))
