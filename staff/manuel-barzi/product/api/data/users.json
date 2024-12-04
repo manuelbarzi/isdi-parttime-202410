@@ -26,5 +26,12 @@
         "email": "le@chuga.com",
         "username": "lechuga",
         "password": "123123123"
+    },
+    {
+        "id": "m4aa84g68ia",
+        "name": "Zana Horia",
+        "email": "zana@horia.com",
+        "username": "zanahoria",
+        "password": "123123123"
     }
 ]
