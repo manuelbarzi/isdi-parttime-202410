@@ -1,4 +1,4 @@
-fetch('http://localhost:8080/users', {
+fetch('http://localhost:8080/posts', {
     method: 'GET',
     headers: {
         Authorization: 'Basic m2w92r8h09'
