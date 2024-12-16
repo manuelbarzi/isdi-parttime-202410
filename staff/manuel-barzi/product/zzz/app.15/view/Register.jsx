@@ -25,16 +25,10 @@ class Register extends Component {
 
                 try {
                     logic.registerUser(name, email, username, password)
-                        .then(() => {
-                            form.reset()
 
-                            this.props.onUserRegistered()
-                        })
-                        .catch(error => {
-                            alert(error.message)
+                    form.reset()
 
-                            console.error(error)
-                        })
+                    this.props.onUserRegistered()
                 } catch (error) {
                     alert(error.message)
 

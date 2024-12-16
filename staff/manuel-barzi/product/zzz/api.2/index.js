@@ -1,5 +1,4 @@
 import express from 'express'
-import cors from 'cors'
 
 import logic from './logic/index.js'
 
@@ -8,8 +7,6 @@ const PORT = 8080
 const api = express()
 
 const jsonBodyParser = express.json()
-
-api.use(cors())
 
 api.get('/', (req, res) => res.send('Hello, API!'))
 
