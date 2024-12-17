@@ -2,12 +2,30 @@ logic.loginUser = (username, password) => {
     validate.username(username)
     validate.password(password)
 
-    const users = JSON.parse(localStorage.users)
+    return fetch('http://localhost:8080/users/auth',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        }
+    )
+        .catch(error => { throw new Error(error.message) })
+        .then(res => {
+            const { status } = res
 
-    const user = users.find(user => user.username === username && user.password === password)
+            if (status === 200)
+                return res.json()
+                    .then(userId => {
+                        sessionStorage.userId = userId
+                    })
 
-    if (!user)
-        throw new Error('wrong credentials')
+            return res.json()
+                .then(body => {
+                    const { error, message } = body
 
-    sessionStorage.userId = user.id
+                    throw new Error(message)
+                })
+        })
 }

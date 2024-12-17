@@ -13,9 +13,13 @@ class Posts extends Component {
         console.log('Posts -> componentDidMount')
 
         try {
-            const posts = logic.getPosts()
+            logic.getPosts()
+                .then(posts => this.setState({ posts }))
+                .catch(error => {
+                    alert(error.message)
 
-            this.setState({ posts })
+                    console.error(error)
+                })
         } catch (error) {
             alert(error.message)
 
