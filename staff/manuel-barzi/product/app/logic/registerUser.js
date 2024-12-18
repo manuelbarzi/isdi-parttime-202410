@@ -15,7 +15,7 @@ logic.registerUser = (name, email, username, password) => {
         .then(res => {
             const { status } = res
 
-            if (status === 201) return
+            if (status === 201) return // early return
 
             return res.json()
                 .then(body => {
