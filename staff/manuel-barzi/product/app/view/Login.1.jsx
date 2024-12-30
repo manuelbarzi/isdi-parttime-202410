@@ -1,5 +1,3 @@
-const Component = React.Component
-
 function Login(props) {
     console.log('Login -> render')
 
