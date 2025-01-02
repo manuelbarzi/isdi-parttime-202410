@@ -22,22 +22,6 @@ function Home(props) {
         }
     }, [])
 
-    const handleLogoutButtonClick = () => {
-        try {
-            logic.logoutUser()
-
-            props.onUserLoggedOut()
-        } catch (error) {
-            alert(error.message)
-
-            console.error(error)
-        }
-    }
-
-    const handlePostCreated = () => setView('posts')
-
-    const handleCreatePostButtonClick = () => setView('create-post')
-
     console.log('Home -> render')
 
     return <main>
@@ -45,11 +29,21 @@ function Home(props) {
 
         <h3>Hello, {name}!</h3>
 
-        <button type="button" onClick={handleLogoutButtonClick}>Logout</button>
+        <button type="button" onClick={() => {
+            try {
+                logic.logoutUser()
 
-        <button type="button" onClick={handleCreatePostButtonClick}>+</button>
+                props.onUserLoggedOut()
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+        }}>Logout</button>
+
+        <button type="button" onClick={() => setView('create-post')}>+</button>
 
         {view === 'posts' && <Posts />}
-        {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} />}
+        {view === 'create-post' && <CreatePost onPostCreated={() => setView('posts')} />}
     </main>
 }

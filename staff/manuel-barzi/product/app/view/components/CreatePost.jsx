@@ -35,10 +35,10 @@ class CreatePost extends Component {
                     console.error(error)
                 }
             }}>
-                <label for="image">Image</label>
+                <label htmlFor="image">Image</label>
                 <input type="url" id="image" />
 
-                <label for="text">Text</label>
+                <label htmlFor="text">Text</label>
                 <input type="text" id="text" />
 
                 <button type="submit">Create</button>
