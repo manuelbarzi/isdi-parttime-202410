@@ -6,10 +6,6 @@ function Posts() {
     useEffect(() => {
         console.log('Posts -> "componentDidMount" (useEffect)')
 
-        loadPosts()
-    }, [])
-
-    const loadPosts = () => {
         try {
             logic.getPosts()
                 .then(posts => setPosts(posts))
@@ -23,13 +19,27 @@ function Posts() {
 
             console.error(error)
         }
-    }
-
-    const handlePostDeleted = () => loadPosts()
+    }, [])
 
     console.log('Posts -> render')
 
     return <section>
-        {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />)}
+        {posts.map(post =>
+            <Post key={post.id} post={post} onPostDeleted={() => {
+                try {
+                    logic.getPosts()
+                        .then(posts => setPosts(posts))
+                        .catch(error => {
+                            alert(error.message)
+
+                            console.error(error)
+                        })
+                } catch (error) {
+                    alert(error.message)
+
+                    console.error(error)
+                }
+            }} />
+        )}
     </section>
 }
