@@ -1,4 +1,16 @@
-const Dorraymon = require('./Dorraymon')
+class Dorraymon {
+    constructor() {
+        this.length = 0
+    }
+
+    at(index) {
+        if (index < 0) {
+            const newIndex = this.length + index
+
+            return this[newIndex]
+        } else return this[index]
+    }
+}
 
 console.log('TEST Dorraymon.prototype.at')
 
