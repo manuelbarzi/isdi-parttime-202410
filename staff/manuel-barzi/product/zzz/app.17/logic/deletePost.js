@@ -1,6 +1,4 @@
-import validate from './helper/validate'
-
-const deletePost = postId => {
+logic.deletePost = postId => {
     validate.id(postId, 'postId')
 
     return fetch(`http://localhost:8080/posts/${postId}`, {
@@ -23,5 +21,3 @@ const deletePost = postId => {
                 })
         })
 }
-
-export default deletePost

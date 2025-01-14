@@ -1,10 +1,6 @@
-import validate from './helper/validate'
-
-const deletePost = postId => {
-    validate.id(postId, 'postId')
-
-    return fetch(`http://localhost:8080/posts/${postId}`, {
-        method: 'DELETE',
+logic.getUserName = () => {
+    return fetch('http://localhost:8080/users', {
+        method: 'GET',
         headers: {
             Authorization: `Basic ${sessionStorage.userId}`
         }
@@ -13,7 +9,9 @@ const deletePost = postId => {
         .then(res => {
             const { status } = res
 
-            if (status === 204) return // early return
+            if (status === 200)
+                return res.json()
+                    .then(name => name)
 
             return res.json()
                 .then(body => {
@@ -23,5 +21,3 @@ const deletePost = postId => {
                 })
         })
 }
-
-export default deletePost

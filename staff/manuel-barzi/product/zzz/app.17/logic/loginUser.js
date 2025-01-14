@@ -1,6 +1,4 @@
-import validate from './helper/validate'
-
-const loginUser = (username, password) => {
+logic.loginUser = (username, password) => {
     validate.username(username)
     validate.password(password)
 
@@ -31,5 +29,3 @@ const loginUser = (username, password) => {
                 })
         })
 }
-
-export default loginUser

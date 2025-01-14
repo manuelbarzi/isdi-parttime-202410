@@ -1,11 +1,4 @@
-import { useState } from 'react'
-
-import logic from './logic'
-
-import Landing from './view/Landing'
-import Login from './view/Login'
-import Register from './view/Register'
-import Home from './view/Home'
+const { useState } = React
 
 function App() {
     const [view, setView] = useState(logic.isUserLoggedIn() ? 'home' : 'landing')
@@ -31,5 +24,3 @@ function App() {
         {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} />}
     </>
 }
-
-export default App

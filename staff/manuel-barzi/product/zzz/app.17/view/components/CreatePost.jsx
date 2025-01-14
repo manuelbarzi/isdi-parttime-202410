@@ -1,5 +1,3 @@
-import logic from '../../logic'
-
 function CreatePost(props) {
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -40,5 +38,3 @@ function CreatePost(props) {
         </form>
     </section>
 }
-
-export default CreatePost

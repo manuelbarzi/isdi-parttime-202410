@@ -1,9 +1,4 @@
-import { useState, useEffect } from 'react'
-
-import logic from '../logic'
-
-import Posts from './components/Posts'
-import CreatePost from './components/CreatePost'
+const { useState, useEffect } = React
 
 function Home(props) {
     const [view, setView] = useState('posts')
@@ -58,5 +53,3 @@ function Home(props) {
         {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} />}
     </main>
 }
-
-export default Home

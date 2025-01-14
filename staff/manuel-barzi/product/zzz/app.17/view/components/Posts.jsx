@@ -1,8 +1,4 @@
-import { useState, useEffect } from 'react'
-
-import logic from '../../logic'
-
-import Post from './Post'
+const { useState, useEffect } = React
 
 function Posts() {
     const [posts, setPosts] = useState([])
@@ -37,5 +33,3 @@ function Posts() {
         {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />)}
     </section>
 }
-
-export default Posts

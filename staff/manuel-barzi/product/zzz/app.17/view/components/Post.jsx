@@ -1,5 +1,3 @@
-import logic from '../../logic'
-
 function Post(props) {
     const handleDeleteButtonClick = () => {
         if (confirm('Delete post?'))
@@ -29,5 +27,3 @@ function Post(props) {
         {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
     </article>
 }
-
-export default Post
