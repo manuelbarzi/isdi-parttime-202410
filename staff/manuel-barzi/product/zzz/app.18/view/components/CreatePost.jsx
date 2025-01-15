@@ -26,7 +26,7 @@ function CreatePost(props) {
 
     console.log('CreatePost -> render')
 
-    return <main>
+    return <section>
         <h3>Create Post</h3>
 
         <form onSubmit={handleFormSubmit}>
@@ -38,7 +38,7 @@ function CreatePost(props) {
 
             <button type="submit">Create</button>
         </form>
-    </main>
+    </section>
 }
 
 export default CreatePost

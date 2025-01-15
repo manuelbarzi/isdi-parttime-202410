@@ -1,5 +1,3 @@
-import './Home.css'
-
 import { useState, useEffect } from 'react'
 
 import logic from '../logic'
@@ -47,24 +45,18 @@ function Home(props) {
 
     console.log('Home -> render')
 
-    return <div className="Home">
-        <header className="Home-header">
-            <h2 className="Home-title">Home</h2>
+    return <main>
+        <h2>Home</h2>
 
-            <h3 className="Home-name">{name}</h3>
+        <h3>Hello, {name}!</h3>
 
-            <button type="button" onClick={handleLogoutButtonClick}>Logout</button>
-        </header>
+        <button type="button" onClick={handleLogoutButtonClick}>Logout</button>
 
-        <div className="Home-content">
-            {view === 'posts' && <Posts />}
-            {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} />}
-        </div>
+        <button type="button" onClick={handleCreatePostButtonClick}>+</button>
 
-        <footer className="Home-footer">
-            <button type="button" onClick={handleCreatePostButtonClick}>+</button>
-        </footer>
-    </div>
+        {view === 'posts' && <Posts />}
+        {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} />}
+    </main>
 }
 
 export default Home

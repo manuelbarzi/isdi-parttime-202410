@@ -23,6 +23,8 @@ function App() {
     const handleUserLoggedOut = () => setView('login')
 
     return <>
+        <h1>Hola, App!</h1>
+
         {view === 'landing' && <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />}
         {view === 'login' && <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />}
         {view === 'register' && <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />}

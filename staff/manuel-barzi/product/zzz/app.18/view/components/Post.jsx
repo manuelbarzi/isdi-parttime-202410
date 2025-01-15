@@ -1,5 +1,3 @@
-import './Post.css'
-
 import logic from '../../logic'
 
 function Post(props) {
@@ -22,16 +20,13 @@ function Post(props) {
 
     console.log('Post -> render')
 
-    return <article className="Post">
-        <h3 className="Post-author">{props.post.author.username}</h3>
-        <img className="Post-image" src={props.post.image} />
-        <p className="Post-text">{props.post.text}</p>
+    return <article>
+        <h3>{props.post.author.username}</h3>
+        <img src={props.post.image} />
+        <p>{props.post.text}</p>
+        <time>{props.post.date}</time>
 
-        <div className="Post-bottom">
-            <time className="Post-date">{props.post.date}</time>
-
-            {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
-        </div>
+        {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
     </article>
 }
 

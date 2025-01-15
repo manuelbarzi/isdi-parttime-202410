@@ -1,3 +1,5 @@
+import './Register.css'
+
 import logic from '../logic'
 
 function Register(props) {
@@ -38,8 +40,8 @@ function Register(props) {
         props.onLoginClicked()
     }
 
-    return <main>
-        <h2>Register</h2>
+    return <main className="Register">
+        <h2 className="Register-title">Register</h2>
 
         <form onSubmit={handleFormSubmit}>
             <label htmlFor="name">Name</label>

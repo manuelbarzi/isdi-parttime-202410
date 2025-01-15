@@ -1,5 +1,3 @@
-import './Login.css'
-
 import logic from '../logic'
 
 function Login(props) {
@@ -38,8 +36,8 @@ function Login(props) {
         props.onRegisterClicked()
     }
 
-    return <main className="Login">
-        <h2 className="Login-title">Login</h2>
+    return <main>
+        <h2>Login</h2>
 
         <form onSubmit={handleFormSubmit}>
             <label htmlFor="username">Username</label>
