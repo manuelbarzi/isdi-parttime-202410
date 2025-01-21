@@ -41,3 +41,16 @@ button {
     background-color: greenyellow;
     color: black;
 }
+
+button.invert {
+    background-color: black;
+    color: greenyellow;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}

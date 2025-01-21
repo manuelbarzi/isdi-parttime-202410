@@ -24,6 +24,8 @@ function CreatePost(props) {
         }
     }
 
+    const handleCancelButtonClick = () => props.onCancel()
+
     console.log('CreatePost -> render')
 
     return <main>
@@ -38,6 +40,8 @@ function CreatePost(props) {
 
             <button type="submit">Create</button>
         </form>
+
+        <button className="invert w-full mt-5" onClick={handleCancelButtonClick}>Cancel</button>
     </main>
 }
 
