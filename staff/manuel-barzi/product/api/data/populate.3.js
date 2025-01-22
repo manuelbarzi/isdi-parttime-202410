@@ -48,18 +48,23 @@ const User = model('User', user)
 const Post = model('Post', post)
 
 mongoose.connect('mongodb://localhost:27017/test')
-    .then(() => Promise.all([User.deleteMany(), Post.deleteMany()]))
+    .then(() => {
+        return User.deleteMany()
+    })
+    .then(() => {
+        return Post.deleteMany()
+    })
     .then(() => {
         const pepito = new User({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: '123123123' })
+
+        return pepito.save()
+    })
+    .then(pepito => {
+        console.log('user saved', pepito._id)
+
         const post = new Post({ author: pepito._id, image: 'https://fbi.cults3d.com/uploaders/12888752/illustration-file/302725c9-6bea-4a51-94a6-78bdc672e410/jiminy-anglea1.jpg', text: 'hat off!' })
 
-        return Promise.all([pepito.save(), post.save()])
+        return post.save()
     })
-    .then((results) => {
-        const pepito = results[0]
-        const post = results[1]
-
-        console.log('user saved', pepito._id)
-        console.log('post saved', post._id)
-    })
+    .then(post => console.log('post saved', post._id))
     .catch(error => console.error(error))
