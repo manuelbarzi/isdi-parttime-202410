@@ -55,7 +55,10 @@ mongoose.connect('mongodb://localhost:27017/test')
 
         return Promise.all([pepito.save(), post.save()])
     })
-    .then(([pepito, post]) => {
+    .then((results) => {
+        // const { 0: pepito, 1: post } = results
+        const [pepito, post] = results
+
         console.log('user saved', pepito._id)
         console.log('post saved', post._id)
     })
