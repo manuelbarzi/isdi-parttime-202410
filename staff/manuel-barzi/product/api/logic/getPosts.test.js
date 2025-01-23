@@ -1,9 +1,14 @@
+import mongoose from 'mongoose'
 import getPosts from './getPosts.js'
 
-try {
-    const posts = getPosts('m2w92r8h09')
-
-    console.log(posts)
-} catch (error) {
-    console.error(error)
-}
+mongoose.connect('mongodb://localhost:27017')
+    .then(() => {
+        try {
+            getPosts('67929ad1c3a1e47aeca030ae')
+                .then(posts => console.log('posts gotten', posts))
+                .catch(error => console.error(error))
+        } catch (error) {
+            console.error(error)
+        }
+    })
+    .catch(error => console.error(error))
