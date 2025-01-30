@@ -1,8 +1,8 @@
-const getPosts = () => {
-    return fetch('http://localhost:8080/posts', {
+const getUserName = () => {
+    return fetch('http://localhost:8080/users', {
         method: 'GET',
         headers: {
-            Authorization: `Bearer ${sessionStorage.token}`
+            Authorization: `Basic ${sessionStorage.userId}`
         }
     })
         .catch(error => { throw new Error(error.message) })
@@ -11,7 +11,7 @@ const getPosts = () => {
 
             if (status === 200)
                 return res.json()
-                    .then(posts => posts)
+                    .then(name => name)
 
             return res.json()
                 .then(body => {
@@ -22,4 +22,4 @@ const getPosts = () => {
         })
 }
 
-export default getPosts
+export default getUserName

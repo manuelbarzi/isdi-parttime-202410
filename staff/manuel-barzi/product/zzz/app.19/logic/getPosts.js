@@ -2,7 +2,7 @@ const getPosts = () => {
     return fetch('http://localhost:8080/posts', {
         method: 'GET',
         headers: {
-            Authorization: `Bearer ${sessionStorage.token}`
+            Authorization: `Basic ${sessionStorage.userId}`
         }
     })
         .catch(error => { throw new Error(error.message) })

@@ -1,17 +1,19 @@
-const getPosts = () => {
-    return fetch('http://localhost:8080/posts', {
-        method: 'GET',
+import validate from './helper/validate'
+
+const deletePost = postId => {
+    validate.id(postId, 'postId')
+
+    return fetch(`http://localhost:8080/posts/${postId}`, {
+        method: 'DELETE',
         headers: {
-            Authorization: `Bearer ${sessionStorage.token}`
+            Authorization: `Basic ${sessionStorage.userId}`
         }
     })
         .catch(error => { throw new Error(error.message) })
         .then(res => {
             const { status } = res
 
-            if (status === 200)
-                return res.json()
-                    .then(posts => posts)
+            if (status === 204) return // early return
 
             return res.json()
                 .then(body => {
@@ -22,4 +24,4 @@ const getPosts = () => {
         })
 }
 
-export default getPosts
+export default deletePost

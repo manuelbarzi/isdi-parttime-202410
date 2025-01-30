@@ -1,16 +1,17 @@
 import validate from './helper/validate'
 
-const createPost = (image, text) => {
-    validate.image(image)
-    validate.text(text)
+const registerUser = (name, email, username, password) => {
+    validate.name(name)
+    validate.email(email)
+    validate.username(username)
+    validate.password(password)
 
-    return fetch('http://localhost:8080/posts', {
+    return fetch('http://localhost:8080/users', {
         method: 'POST',
         headers: {
-            Authorization: `Bearer ${sessionStorage.token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ image, text })
+        body: JSON.stringify({ name, email, username, password })
     })
         .catch(error => { throw new Error(error.message) })
         .then(res => {
@@ -27,4 +28,4 @@ const createPost = (image, text) => {
         })
 }
 
-export default createPost
+export default registerUser

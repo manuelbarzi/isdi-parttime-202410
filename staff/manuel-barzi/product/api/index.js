@@ -69,7 +69,11 @@ const startApi = () => {
 
     api.get('/posts', (req, res) => {
         try {
-            const userId = req.headers.authorization.slice(6) // Basic abc123
+            const token = req.headers.authorization.slice(7) // Bearer token
+
+            const payload = jwt.verify(token, SECRET)
+
+            const { sub: userId } = payload
 
             logic.getPosts(userId)
                 .then(posts => res.json(posts))
@@ -82,7 +86,11 @@ const startApi = () => {
 
     api.post('/posts', jsonBodyParser, (req, res) => {
         try {
-            const userId = req.headers.authorization.slice(6) // Basic abc123
+            const token = req.headers.authorization.slice(7) // Bearer token
+
+            const payload = jwt.verify(token, SECRET)
+
+            const { sub: userId } = payload
 
             const { image, text } = req.body
 
@@ -96,7 +104,11 @@ const startApi = () => {
 
     api.delete('/posts/:postId', jsonBodyParser, (req, res) => {
         try {
-            const userId = req.headers.authorization.slice(6) // Basic abc123
+            const token = req.headers.authorization.slice(7) // Bearer token
+
+            const payload = jwt.verify(token, SECRET)
+
+            const { sub: userId } = payload
 
             const { postId } = req.params
 

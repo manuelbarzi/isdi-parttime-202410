@@ -19,8 +19,8 @@ const loginUser = (username, password) => {
 
             if (status === 200)
                 return res.json()
-                    .then(token => {
-                        sessionStorage.token = token
+                    .then(userId => {
+                        sessionStorage.userId = userId
                     })
 
             return res.json()
