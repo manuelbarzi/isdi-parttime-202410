@@ -1,0 +1,1 @@
+curl -X POST -H 'Authorization: Basic 67929ad1c3a1e47aeca030ae' -H 'Content-Type: application/json' -d '{"image":"https://i0.wp.com/www.halaja.org/wp-content/uploads/2015/09/Jiminy_Cricket_standing_up_to_Lampwick.png?fit=678%2C635&ssl=1","text":"hello peter"}' http://localhost:8080/posts -v
