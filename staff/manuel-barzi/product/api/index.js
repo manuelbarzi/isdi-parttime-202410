@@ -4,6 +4,9 @@ import cors from 'cors'
 import jwt from 'jsonwebtoken'
 
 import logic from './logic/index.js'
+import errors from './errors/index.js'
+
+const { ValidationError, SystemError, DuplicityError, CredentialsError, NotFoundError } = errors
 
 const PORT = 8080
 const SECRET = 'a quique le gusta comer las eses'
@@ -25,9 +28,19 @@ const startApi = () => {
 
             logic.registerUser(name, email, username, password)
                 .then(() => res.status(201).send())
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof DuplicityError)
+                        res.status(409).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
@@ -45,9 +58,19 @@ const startApi = () => {
 
                     res.json(token)
                 })
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof CredentialsError)
+                        res.status(401).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
@@ -61,9 +84,19 @@ const startApi = () => {
 
             logic.getUserName(userId)
                 .then(name => res.json(name))
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
@@ -124,5 +157,7 @@ const startApi = () => {
 }
 
 connectToDb()
-    .then(() => startApi())
+    .then(() =>
+        startApi()
+    )
     .catch(error => console.error(error))
