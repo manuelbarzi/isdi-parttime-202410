@@ -110,9 +110,19 @@ const startApi = () => {
 
             logic.getPosts(userId)
                 .then(posts => res.json(posts))
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
 
     })
@@ -129,9 +139,19 @@ const startApi = () => {
 
             logic.createPost(userId, image, text)
                 .then(() => res.status(201).send())
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
@@ -147,9 +167,19 @@ const startApi = () => {
 
             logic.deletePost(userId, postId)
                 .then(() => res.status(204).send())
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
