@@ -1,10 +1,6 @@
-import validate from './helper/validate'
-
-const deletePost = postId => {
-    validate.id(postId, 'postId')
-
-    return fetch(`${import.meta.env.VITE_API_URL}/posts/${postId}`, {
-        method: 'DELETE',
+const getUserName = () => {
+    return fetch('http://localhost:8080/users', {
+        method: 'GET',
         headers: {
             Authorization: `Bearer ${sessionStorage.token}`
         }
@@ -13,7 +9,9 @@ const deletePost = postId => {
         .then(res => {
             const { status } = res
 
-            if (status === 204) return // early return
+            if (status === 200)
+                return res.json()
+                    .then(name => name)
 
             return res.json()
                 .then(body => {
@@ -24,4 +22,4 @@ const deletePost = postId => {
         })
 }
 
-export default deletePost
+export default getUserName

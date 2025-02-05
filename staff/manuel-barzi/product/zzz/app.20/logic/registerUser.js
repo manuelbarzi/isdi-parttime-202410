@@ -6,7 +6,7 @@ const registerUser = (name, email, username, password) => {
     validate.username(username)
     validate.password(password)
 
-    return fetch(`${import.meta.env.VITE_API_URL}/users`, {
+    return fetch('http://localhost:8080/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -1,0 +1,27 @@
+.Post {
+    border: 1px solid greenyellow;
+    padding: 5px;
+}
+
+.Post-author {
+    margin: 0;
+}
+
+.Post-image {
+    width: 100%;
+}
+
+.Post-text {
+    margin: 0;
+}
+
+.Post-date {
+    font-size: 12px;
+    color: yellowgreen;
+}
+
+.Post-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,17 +1,16 @@
 import validate from './helper/validate'
 
-const registerUser = (name, email, username, password) => {
-    validate.name(name)
-    validate.email(email)
-    validate.username(username)
-    validate.password(password)
+const createPost = (image, text) => {
+    validate.image(image)
+    validate.text(text)
 
-    return fetch(`${import.meta.env.VITE_API_URL}/users`, {
+    return fetch('http://localhost:8080/posts', {
         method: 'POST',
         headers: {
+            Authorization: `Bearer ${sessionStorage.token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email, username, password })
+        body: JSON.stringify({ image, text })
     })
         .catch(error => { throw new Error(error.message) })
         .then(res => {
@@ -28,4 +27,4 @@ const registerUser = (name, email, username, password) => {
         })
 }
 
-export default registerUser
+export default createPost
