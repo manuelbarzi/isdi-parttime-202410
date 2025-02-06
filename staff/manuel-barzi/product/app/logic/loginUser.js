@@ -1,4 +1,4 @@
-import validate from './helper/validate'
+import { validate, errors } from 'com'
 
 const loginUser = (username, password) => {
     validate.username(username)
@@ -27,7 +27,9 @@ const loginUser = (username, password) => {
                 .then(body => {
                     const { error, message } = body
 
-                    throw new Error(message)
+                    const constructor = errors[error]
+
+                    throw new constructor(message)
                 })
         })
 }

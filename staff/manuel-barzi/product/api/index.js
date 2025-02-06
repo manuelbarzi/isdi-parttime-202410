@@ -6,7 +6,7 @@ import cors from 'cors'
 import jwt from 'jsonwebtoken'
 
 import logic from './logic/index.js'
-import errors from './errors/index.js'
+import { errors } from 'com'
 
 const { ValidationError, SystemError, DuplicityError, CredentialsError, NotFoundError } = errors
 
