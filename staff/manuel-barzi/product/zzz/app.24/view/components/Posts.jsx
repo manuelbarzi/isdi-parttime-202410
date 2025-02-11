@@ -33,12 +33,10 @@ function Posts() {
 
     const handlePostDeleted = () => loadPosts()
 
-    const handlePostLikeToggled = () => loadPosts()
-
     console.log('Posts -> render')
 
     return <main className="Posts">
-        {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} onPostLikeToggled={handlePostLikeToggled} />)}
+        {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />)}
     </main>
 }
 

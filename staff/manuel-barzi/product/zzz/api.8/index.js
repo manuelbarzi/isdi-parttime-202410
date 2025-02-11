@@ -154,7 +154,7 @@ const startApi = () => {
         }
     })
 
-    api.delete('/posts/:postId', (req, res) => {
+    api.delete('/posts/:postId', jsonBodyParser, (req, res) => {
         try {
             const token = req.headers.authorization.slice(7) // Bearer token
 
@@ -165,34 +165,6 @@ const startApi = () => {
             const { postId } = req.params
 
             logic.deletePost(userId, postId)
-                .then(() => res.status(204).send())
-                .catch(error => {
-                    if (error instanceof NotFoundError)
-                        res.status(404).json({ error: error.constructor.name, message: error.message })
-                    else if (error instanceof SystemError)
-                        res.status(500).json({ error: error.constructor.name, message: error.message })
-                    else
-                        res.status(500).json({ error: SystemError.name, message: error.message })
-                })
-        } catch (error) {
-            if (error instanceof ValidationError)
-                res.status(400).json({ error: error.constructor.name, message: error.message })
-            else
-                res.status(500).json({ error: SystemError.name, message: error.message })
-        }
-    })
-
-    api.patch('/posts/:postId/likes', (req, res) => {
-        try {
-            const token = req.headers.authorization.slice(7) // Bearer token
-
-            const payload = jwt.verify(token, process.env.JWT_SECRET)
-
-            const { sub: userId } = payload
-
-            const { postId } = req.params
-
-            logic.toggleLikePost(userId, postId)
                 .then(() => res.status(204).send())
                 .catch(error => {
                     if (error instanceof NotFoundError)

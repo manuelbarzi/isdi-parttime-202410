@@ -22,22 +22,6 @@ function Post(props) {
             }
     }
 
-    const handleToggleLikeClick = () => {
-        try {
-            logic.toggleLikePost(props.post.id)
-                .then(() => props.onPostLikeToggled())
-                .catch(error => {
-                    alert(error.message)
-
-                    console.error(error)
-                })
-        } catch (error) {
-            alert(error.message)
-
-            console.error(error)
-        }
-    }
-
     console.log('Post -> render')
 
     return <article className="Post">
@@ -47,8 +31,6 @@ function Post(props) {
 
         <div className="Post-bottom">
             <time className="Post-date">{formatDate(props.post.date)}</time>
-
-            <button type="button" onClick={handleToggleLikeClick}>{`${props.post.liked ? '❤️' : '🩶'} (${props.post.likes})`}</button>
 
             {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
         </div>

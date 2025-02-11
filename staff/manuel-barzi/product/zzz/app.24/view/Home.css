@@ -1,0 +1,31 @@
+.Home {
+    margin: 0 10px;
+}
+
+.Home-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Home-title {
+    margin: 0;
+}
+
+.Home-name {
+    font-size: 14px;
+}
+
+.Home-content {
+    margin-bottom: 36px;
+}
+
+.Home-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 20px);
+    height: 36px;
+}
