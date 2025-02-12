@@ -5,7 +5,7 @@ import { errors } from 'com'
 
 const { CredentialsError, SystemError } = errors
 
-function Login(props) {
+function Login({ onUserLoggedIn, onRegisterClicked }) {
     console.log('Login -> render')
 
     const handleFormSubmit = event => {
@@ -21,7 +21,7 @@ function Login(props) {
                 .then(() => {
                     form.reset()
 
-                    props.onUserLoggedIn()
+                    onUserLoggedIn()
                 })
                 .catch(error => {
                     if (error instanceof CredentialsError)
@@ -39,7 +39,7 @@ function Login(props) {
     const handleRegisterLinkClick = event => {
         event.preventDefault()
 
-        props.onRegisterClicked()
+        onRegisterClicked()
     }
 
     return <main className="Login">

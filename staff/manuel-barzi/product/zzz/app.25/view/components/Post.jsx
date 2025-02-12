@@ -1,0 +1,58 @@
+import './Post.css'
+
+import logic from '../../logic'
+
+import formatDate from '../helper/formatDate'
+
+function Post(props) {
+    const handleDeleteButtonClick = () => {
+        if (confirm('Delete post?'))
+            try {
+                logic.deletePost(props.post.id)
+                    .then(() => props.onPostDeleted())
+                    .catch(error => {
+                        alert(error.message)
+
+                        console.error(error)
+                    })
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+    }
+
+    const handleToggleLikeClick = () => {
+        try {
+            logic.toggleLikePost(props.post.id)
+                .then(() => props.onPostLikeToggled())
+                .catch(error => {
+                    alert(error.message)
+
+                    console.error(error)
+                })
+        } catch (error) {
+            alert(error.message)
+
+            console.error(error)
+        }
+    }
+
+    console.log('Post -> render')
+
+    return <article className="Post">
+        <h3 className="Post-author">{props.post.author.username}</h3>
+        <img className="Post-image" src={props.post.image} />
+        <p className="Post-text">{props.post.text}</p>
+
+        <div className="Post-bottom">
+            <time className="Post-date">{formatDate(props.post.date)}</time>
+
+            <button type="button" onClick={handleToggleLikeClick}>{`${props.post.liked ? '❤️' : '🩶'} (${props.post.likes})`}</button>
+
+            {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
+        </div>
+    </article>
+}
+
+export default Post

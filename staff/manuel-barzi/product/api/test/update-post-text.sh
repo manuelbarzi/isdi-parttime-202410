@@ -1,0 +1,1 @@
+curl -X PATCH -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2FjZWMxNzUyODVlNGQ3NDllNzhhY2EiLCJpYXQiOjE3MzkzODk2NDF9.2wMGFen3L_J7-zkGXqDQmtSAjsqjflYqywHLufmhpEk' -H 'Content-Type: application/json' -d '{"text":"hello world"}' http://localhost:8080/posts/67acec4a5285e4d749e78ad8/text -v
