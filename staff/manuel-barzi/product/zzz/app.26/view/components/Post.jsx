@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import './Post.css'
+
 import logic from '../../logic'
 
 import formatDate from '../helper/formatDate'
@@ -70,32 +72,31 @@ function Post({ post, onPostDeleted, onPostLikeToggled, onPostTextEdited }) {
 
     console.log('Post -> render')
 
-    return <article className="border border-greenyellow p-1">
-        <h3>{post.author.username}</h3>
+    return <article className="Post">
+        <h3 className="Post-author">{post.author.username}</h3>
 
-        <img src={post.image} />
+        <img className="Post-image" src={post.image} />
 
         {edit ?
-            <input className="input w-full" onChange={handlePostTextChange} defaultValue={text} />
+            <input className="Post-text" onChange={handlePostTextChange} defaultValue={text} />
             :
-            <p>{text}</p>
+            <p className="Post-text">{text}</p>
         }
 
-        <div className="flex items-center justify-between">
-            <time className="text-[10px] text-yellowgreen">{formatDate(post.date)}</time>
+        <div className="Post-bottom">
+            <time className="Post-date">{formatDate(post.date)}</time>
 
-            <button className="button" type="button" onClick={handleToggleLikeClick}>{`${post.liked ? '❤️' : '🩶'} (${post.likes})`}</button>
+            <button type="button" onClick={handleToggleLikeClick}>{`${post.liked ? '❤️' : '🩶'} (${post.likes})`}</button>
 
             {post.own && <>
                 {edit ?
-                    <div>
-                        <button className="button" type="button" onClick={handleSaveEditButtonClick}>💾</button><button className="button" type="button" onClick={handleCancelEditButtonClick}>❌</button></div>
+                    <div>< button type="button" onClick={handleSaveEditButtonClick}>💾</button><button type="button" onClick={handleCancelEditButtonClick}>❌</button></div>
                     :
-                    <button className="button" type="button" onClick={handleEditButtonClick}>📝</button>
+                    <button type="button" onClick={handleEditButtonClick}>📝</button>
                 }
             </>}
 
-            {post.own && <button className="button" type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
+            {post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
         </div>
     </article>
 }

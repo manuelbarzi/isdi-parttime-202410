@@ -1,3 +1,5 @@
+import './Register.css'
+
 import logic from '../logic'
 import { errors } from 'com'
 
@@ -44,27 +46,27 @@ function Register({ onUserRegistered, onLoginClicked }) {
         onLoginClicked()
     }
 
-    return <main className="main">
-        <h2 className="text-orange">Register</h2>
+    return <main className="Register">
+        <h2 className="Register-title">Register</h2>
 
-        <form className="form" onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit}>
             <label htmlFor="name">Name</label>
-            <input className="input" type="text" id="name" />
+            <input type="text" id="name" />
 
             <label htmlFor="email">E-mail</label>
-            <input className="input" type="email" id="email" />
+            <input type="email" id="email" />
 
             <label htmlFor="username">Username</label>
-            <input className="input" type="text" id="username" />
+            <input type="text" id="username" />
 
             <label htmlFor="password">Password</label>
-            <input className="input" type="password" id="password" />
+            <input type="password" id="password" />
 
-            <button className="button" type="submit">Register</button>
+            <button type="submit">Register</button>
         </form>
 
-        <a className="underline" href="" onClick={handleLoginLinkClick}>Login</a>
-    </main >
+        <a href="" onClick={handleLoginLinkClick}>Login</a>
+    </main>
 }
 
 export default Register

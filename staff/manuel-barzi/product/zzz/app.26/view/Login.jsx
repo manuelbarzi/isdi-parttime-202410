@@ -1,3 +1,5 @@
+import './Login.css'
+
 import logic from '../logic'
 import { errors } from 'com'
 
@@ -40,20 +42,20 @@ function Login({ onUserLoggedIn, onRegisterClicked }) {
         onRegisterClicked()
     }
 
-    return <main className="main">
-        <h2 className="text-orange">Login</h2>
+    return <main className="Login">
+        <h2 className="Login-title">Login</h2>
 
-        <form className="form" onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit}>
             <label htmlFor="username">Username</label>
-            <input className="input" type="text" id="username" />
+            <input type="text" id="username" />
 
             <label htmlFor="password">Password</label>
-            <input className="input" type="password" id="password" />
+            <input type="password" id="password" />
 
-            <button className="button" type="submit">Login</button>
+            <button type="submit">Login</button>
         </form>
 
-        <a className="underline" href="" onClick={handleRegisterLinkClick}>Register</a>
+        <a href="" onClick={handleRegisterLinkClick}>Register</a>
     </main>
 }
 

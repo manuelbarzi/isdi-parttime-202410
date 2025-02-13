@@ -1,57 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-* {
-    font-family: Quantico;
-    color: greenyellow;
-    background-color: black;
+@import "tailwindcss";
+
+@theme {
+    --font-quantico: Quantico;
+    --color-greenyellow: greenyellow;
+    --color-yellowgreen: yellowgreen;
+    --color-orange: orange;
 }
 
-html,
-body {
-    margin: 0;
-}
+@layer components {
+    .main {
+        @apply my-0 mx-2;
+    }
 
-body {
-    background-color: lightgray;
-}
+    .form {
+        @apply flex flex-col gap-1;
+    }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+    .input {
+        @apply border-1 border-greenyellow;
+    }
 
-input,
-button {
-    border: 1px solid greenyellow;
-}
-
-input,
-button,
-label,
-a {
-    font-size: 18px;
-}
-
-label {
-    font-weight: bold;
-}
-
-button {
-    background-color: greenyellow;
-    color: black;
-    cursor: pointer;
-}
-
-button.invert {
-    background-color: black;
-    color: greenyellow;
-}
-
-.w-full {
-    width: 100%;
-}
-
-.mt-5 {
-    margin-top: 5px;
+    .button {
+        @apply bg-greenyellow text-black px-1 cursor-pointer;
+    }
 }

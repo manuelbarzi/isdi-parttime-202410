@@ -1,3 +1,5 @@
+import './Home.css'
+
 import { useState, useEffect } from 'react'
 
 import logic from '../logic'
@@ -64,24 +66,24 @@ function Home({ onUserLoggedOut }) {
 
     console.log('Home -> render')
 
-    return <div className="my-0 mx-2">
-        <header className="flex items-center justify-between">
-            <h2 className="text-md" onClick={handleHomeClick}>Home</h2>
+    return <div className="Home">
+        <header className="Home-header">
+            <h2 className="Home-title" onClick={handleHomeClick}>Home</h2>
 
-            <h3 className="text-xs">{name}</h3>
+            <h3 className="Home-name">{name}</h3>
 
-            <button className="button" type="button" onClick={handleLogoutButtonClick}>Logout</button>
+            <button type="button" onClick={handleLogoutButtonClick}>Logout</button>
         </header>
 
-        <div className="mb-6">
+        <div className="Home-content">
             <Routes>
                 <Route path="/" element={<Posts />} />
                 <Route path="/create-post" element={<CreatePost onPostCreated={handlePostCreated} onCancel={handleCancelCreatePost} />} />
             </Routes>
         </div>
 
-        <footer className="flex items-center justify-center fixed bottom-0 w-full h-6">
-            {view !== 'create-post' && <button className="button" type="button" onClick={handleCreatePostButtonClick}>+</button>}
+        <footer className="Home-footer">
+            {view !== 'create-post' && <button type="button" onClick={handleCreatePostButtonClick}>+</button>}
         </footer>
     </div>
 }
