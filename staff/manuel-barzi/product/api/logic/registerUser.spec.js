@@ -35,7 +35,7 @@ describe('registerUser', () => {
         return User.create({ name: 'Wendy Darling', email: 'wendy@darling.com', username: 'wendydarling', password: '123123123' })
             .then(() => registerUser('Wendy Darling', 'wendy@darling.com', 'wendydarling', '123123123'))
             .catch(error => catchedError = error)
-            .then(() => {
+            .finally(() => {
                 expect(catchedError).to.be.instanceOf(DuplicityError)
                 expect(catchedError.message).to.equal('user already exists')
             })

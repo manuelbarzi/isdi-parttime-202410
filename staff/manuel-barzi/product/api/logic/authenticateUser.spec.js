@@ -34,7 +34,7 @@ describe('authenticateUser', () => {
         return User.create({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: '123123123' })
             .then(() => authenticateUser('pepitogrill', '123123123'))
             .catch(error => catchedError = error)
-            .then(() => {
+            .finally(() => {
                 expect(catchedError).instanceOf(CredentialsError)
                 expect(catchedError.message).to.equal('wrong credentials')
             })
@@ -46,7 +46,7 @@ describe('authenticateUser', () => {
         return User.create({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: '123123123' })
             .then(() => authenticateUser('pepitogrillo', '12312312'))
             .catch(error => catchedError = error)
-            .then(() => {
+            .finally(() => {
                 expect(catchedError).instanceOf(CredentialsError)
                 expect(catchedError.message).to.equal('wrong credentials')
             })
