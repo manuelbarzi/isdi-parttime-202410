@@ -17,7 +17,7 @@ describe('createPost', () => {
     beforeEach(() => Promise.all([User.deleteMany(), Post.deleteMany()]))
 
     it('succeeds on existing user', () => {
-        return User.create({ name: 'Campa Nilla', email: 'campa@nill.acom', username: 'campanilla', password: '123123123' })
+        return User.create({ name: 'Campa Nilla', email: 'campa@nilla.com', username: 'campanilla', password: '123123123' })
             .then(user => {
                 return createPost(user._id.toString(), 'https://www.image.com/123', 'hello world')
                     .then(result => {
@@ -36,7 +36,7 @@ describe('createPost', () => {
     it('fails on wrong user id', () => {
         let catchedError
 
-        return User.create({ name: 'Campa Nilla', email: 'campa@nill.acom', username: 'campanilla', password: '123123123' })
+        return User.create({ name: 'Campa Nilla', email: 'campa@nilla.com', username: 'campanilla', password: '123123123' })
             .then(user => createPost(new ObjectId().toString(), 'https://www.image.com/123', 'hello world'))
             .catch(error => catchedError = error)
             .finally(() => {
