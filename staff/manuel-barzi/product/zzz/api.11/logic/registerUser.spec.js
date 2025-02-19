@@ -9,8 +9,6 @@ import registerUser from './registerUser.js'
 import { errors } from 'com'
 const { DuplicityError } = errors
 
-import bcrypt from 'bcryptjs'
-
 describe('registerUser', () => {
     before(() => mongoose.connect(process.env.TEST_MONGO_URL))
 
@@ -27,18 +25,14 @@ describe('registerUser', () => {
                 expect(user.name).to.equal('Peter Pan')
                 expect(user.email).to.equal('peter@pan.com')
                 expect(user.username).to.equal('peterpan')
-                //expect(user.password).to.equal('123123123')
-
-                return bcrypt.compare('123123123', user.password)
+                expect(user.password).to.equal('123123123')
             })
-            .then(match => expect(match).to.be.true)
     })
 
     it('fails on existing user', () => {
         let catchedError
 
-        return bcrypt.hash('123123123', 10)
-            .then(hash => User.create({ name: 'Wendy Darling', email: 'wendy@darling.com', username: 'wendydarling', password: hash }))
+        return User.create({ name: 'Wendy Darling', email: 'wendy@darling.com', username: 'wendydarling', password: '123123123' })
             .then(() => registerUser('Wendy Darling', 'wendy@darling.com', 'wendydarling', '123123123'))
             .catch(error => catchedError = error)
             .finally(() => {
