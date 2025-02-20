@@ -5,14 +5,10 @@ import logic from '../logic'
 import Posts from './components/Posts'
 import CreatePost from './components/CreatePost'
 
-import { Routes, Route, useNavigate } from 'react-router-dom'
-
-import { useAppContext } from '../context'
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
 
 function Home({ onUserLoggedOut }) {
     const navigate = useNavigate()
-
-    const { alert } = useAppContext()
 
     const [view, setView] = useState('posts')
     const [name, setName] = useState(null)

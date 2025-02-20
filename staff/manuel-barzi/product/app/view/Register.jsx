@@ -3,8 +3,12 @@ import { errors } from 'com'
 
 const { DuplicityError, SystemError } = errors
 
+import { useAppContext } from '../context'
+
 function Register({ onUserRegistered, onLoginClicked }) {
     console.log('Register-> render')
+
+    const { alert } = useAppContext()
 
     const handleFormSubmit = event => {
         event.preventDefault()

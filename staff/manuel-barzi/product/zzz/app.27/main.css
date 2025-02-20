@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+    --font-quantico: Quantico;
+    --color-greenyellow: greenyellow;
+    --color-yellowgreen: yellowgreen;
+    --color-orange: orange;
+}
+
+@layer components {
+    .main {
+        @apply my-0 mx-2;
+    }
+
+    .form {
+        @apply flex flex-col gap-1;
+    }
+
+    .input {
+        @apply border-1 border-greenyellow;
+    }
+
+    .button {
+        @apply bg-greenyellow text-black px-1 cursor-pointer;
+    }
+}

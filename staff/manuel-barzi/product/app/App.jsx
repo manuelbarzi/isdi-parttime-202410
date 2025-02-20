@@ -7,7 +7,12 @@ import Login from './view/Login'
 import Register from './view/Register'
 import Home from './view/Home'
 
+import Alert from './view/components/Alert'
+import Confirm from './view/components/Confirm'
+
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
+
+import { AppContext } from './context'
 
 function App() {
     const navigate = useNavigate()
@@ -18,6 +23,10 @@ function App() {
         viewInPath = 'landing'
 
     const [view, setView] = useState(logic.isUserLoggedIn() ? 'home' : viewInPath)
+    const [alertMessage, setAlertMessage] = useState('')
+    const [confirmMessage, setConfirmMessage] = useState('')
+    // WARN does not work (state changes to undefined when trying to setConfirmCallback with a function)
+    // const [confirmCallback, setConfirmCallback] = useState(null)
 
     console.log('App -> render')
 
@@ -48,23 +57,56 @@ function App() {
         }
     }, [view])
 
-    return <Routes>
-        <Route path="/landing" element={
-            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />
-        } />
+    const handleAcceptAlert = () => setAlertMessage('')
 
-        <Route path="/login" element={
-            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />
-        } />
+    const handleAcceptConfirm = () => {
+        // confirmCallback(true)
+        App.confirmCallback(true)
 
-        <Route path="/register" element={
-            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />
-        } />
+        setConfirmMessage('')
+        // setConfirmCallback(null)
+        App.confirmCallback = null
+    }
 
-        <Route path="/*" element={
-            logic.isUserLoggedIn() ? <Home onUserLoggedOut={handleUserLoggedOut} /> : <Navigate to="/landing" />
-        } />
-    </Routes>
+    const handleCancelConfirm = () => {
+        // confirmCallback(false)
+        App.confirmCallback(false)
+
+        setConfirmMessage('')
+        // setConfirmCallback(null)
+        App.confirmCallback = null
+    }
+
+    const alert = message => setAlertMessage(message)
+
+    const confirm = (message, callback) => {
+        setConfirmMessage(message)
+        // setConfirmCallback(callback)
+        App.confirmCallback = callback
+    }
+
+    return <AppContext.Provider value={{ alert, confirm }}>
+        <Routes>
+            <Route path="/landing" element={
+                logic.isUserLoggedIn() ? <Navigate to="/" /> : <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />
+            } />
+
+            <Route path="/login" element={
+                logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />
+            } />
+
+            <Route path="/register" element={
+                logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />
+            } />
+
+            <Route path="/*" element={
+                logic.isUserLoggedIn() ? <Home onUserLoggedOut={handleUserLoggedOut} /> : <Navigate to="/landing" />
+            } />
+        </Routes>
+
+        {alertMessage && <Alert message={alertMessage} onAccept={handleAcceptAlert} />}
+        {confirmMessage && <Confirm message={confirmMessage} onAccept={handleAcceptConfirm} onCancel={handleCancelConfirm} />}
+    </AppContext.Provider>
 }
 
 export default App

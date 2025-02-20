@@ -4,32 +4,25 @@ import logic from '../../logic'
 
 import formatDate from '../helper/formatDate'
 
-import { useAppContext } from '../../context'
-
 function Post({ post, onPostDeleted, onPostLikeToggled, onPostTextEdited }) {
-    const { alert, confirm } = useAppContext()
-
     const [edit, setEdit] = useState(false)
     const [text, setText] = useState(post.text)
 
     const handleDeleteButtonClick = () => {
-        confirm('Delete post?', accepted => {
-            if (accepted)
-                try {
-                    logic.deletePost(post.id)
-                        .then(() => onPostDeleted())
-                        .catch(error => {
-                            alert(error.message)
+        if (confirm('Delete post?'))
+            try {
+                logic.deletePost(post.id)
+                    .then(() => onPostDeleted())
+                    .catch(error => {
+                        alert(error.message)
 
-                            console.error(error)
-                        })
-                } catch (error) {
-                    alert(error.message)
+                        console.error(error)
+                    })
+            } catch (error) {
+                alert(error.message)
 
-                    console.error(error)
-                }
-        })
-
+                console.error(error)
+            }
     }
 
     const handleToggleLikeClick = () => {

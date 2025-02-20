@@ -4,11 +4,7 @@ import logic from '../../logic'
 
 import Post from './Post'
 
-import { useAppContext } from '../../context'
-
 function Posts() {
-    const { alert } = useAppContext()
-
     const [posts, setPosts] = useState([])
 
     useEffect(() => {

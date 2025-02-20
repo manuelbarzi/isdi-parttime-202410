@@ -1,10 +1,6 @@
 import logic from '../../logic'
 
-import { useAppContext } from '../../context'
-
 function CreatePost({ onPostCreated, onCancel }) {
-    const { alert } = useAppContext()
-
     const handleFormSubmit = event => {
         event.preventDefault()
 
